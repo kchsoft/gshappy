@@ -65,7 +65,8 @@ public class prayANDbirthday {
 		
 		result = pray.getPray(stmt);
 		while(result.next()) {
-			id = result.getInt("id") - Day; // ex) if Month == 1 , Day 1 == id 32
+//			id = result.getInt("id") - Day; // ex) if Month == 1 , Day 1 == id 32
+			id = result.getRow()- Day;
 			if(id == 0 || id % DaysOfMonth[Month-1] == 0) {
 //			if(true)
 				System.out.printf("공동체: %s\n이름 : %s\n<기도제목>\n%s\n\n" , result.getString("community"),result.getString("name"),
