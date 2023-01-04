@@ -1,4 +1,4 @@
-package 제자팀;
+package Disciple;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,4 +36,18 @@ public class Birthday {
 		sql = "select * from birthday;";
 		return stmt.executeQuery(sql);
 	}
+
+	void set_DiscipleBirthday(Statement stmt) throws SQLException {
+		sql = "DROP TABLE IF EXISTS disciplebirthday CASCADE;\n"
+			+ "create table disciplebirthday (community varchar , name varchar , birthday varchar);";
+		stmt.executeUpdate(sql);
+		sql = "COPY disciplebirthday FROM 'C:/DataBaseCsvFile/disciplebirthday.csv' DELIMITER ',' CSV HEADER;";
+		stmt.executeUpdate(sql);
+	}	
+
+	ResultSet get_DiscipleBirthday(Statement stmt) throws SQLException {
+		sql = "select * from disciplebirthday order by birthday;";
+		return stmt.executeQuery(sql);
+	}
+	
 }

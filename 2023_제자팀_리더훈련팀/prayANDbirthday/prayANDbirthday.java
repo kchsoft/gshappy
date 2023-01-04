@@ -1,9 +1,8 @@
-package 제자팀;
+package Disciple;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,11 +19,12 @@ public class prayANDbirthday {
 		String sql = "";
 		String Quarter = "";
 		String temp = "";
-		String[] BirthdayMD = new String[2];
+		String[] BirthdayMD = new String[3];
 		Connection connection = DriverManager.getConnection(jdbcURL,username,password);
 		Statement stmt = connection.createStatement(); 
 		ResultSet result;
 		LocalDate Date = LocalDate.now();
+//		Date = LocalDate.of(2023,2,4);
 		int Day = Date.getDayOfMonth();
 		int Month = Date.getMonthValue();
 		int id;
@@ -65,13 +65,25 @@ public class prayANDbirthday {
 		
 		result = pray.getPray(stmt);
 		while(result.next()) {
-			id = result.getInt("id") - Day; // ex) Month == 1 , Day 1 == id 32
+			id = result.getInt("id") - Day; // ex) if Month == 1 , Day 1 == id 32
 			if(id == 0 || id % DaysOfMonth[Month-1] == 0) {
 //			if(true)
-				System.out.printf("공동체 : %s\n이름 : %s\n<기도제목>\n%s\n\n" , result.getString("community"),result.getString("name"),
+				System.out.printf("공동체: %s\n이름 : %s\n<기도제목>\n%s\n\n" , result.getString("community"),result.getString("name"),
 					result.getString("pray").replace('?', '-'));
 			}
 		}
+
+		birthday.set_DiscipleBirthday(stmt);
+		result = birthday.get_DiscipleBirthday(stmt);
+		System.out.printf("%d월 리더훈련팀 생일자\n",Month);
+		while(result.next()) {
+				BirthdayMD = result.getString("birthday").split("-");
+				int birthdayMonth = Integer.valueOf(BirthdayMD[1]);
+				int birthdayDay = Integer.valueOf(BirthdayMD[2]);
+				if(Month == birthdayMonth) {
+					System.out.printf("%s %s %d일\n",result.getString("community"),result.getString("name"),birthdayDay);
+				}
+			}
 
 		System.out.printf("\nProgram exit\n");
 		sql = input.nextLine();

@@ -1,6 +1,8 @@
-package 제자팀;
+package Disciple;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Pray{
 	String sql;
