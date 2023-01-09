@@ -24,7 +24,7 @@ public class prayANDbirthday {
 		Statement stmt = connection.createStatement(); 
 		ResultSet result;
 		LocalDate Date = LocalDate.now();
-//		Date = LocalDate.of(2023,2,4);
+//		Date = LocalDate.of(2023,2,12);
 		int Day = Date.getDayOfMonth();
 		int Month = Date.getMonthValue();
 		int id = 0;
@@ -48,8 +48,6 @@ public class prayANDbirthday {
 		pray.setCSV(stmt);
 
 		Birthday birthday = new Birthday();
-		birthday.set_mmddTable(stmt);
-		birthday.updateONEbirthday(stmt);
 		birthday.set_BirthdayTable(stmt);
 		result = birthday.get_Birthday(stmt);
 
@@ -57,7 +55,7 @@ public class prayANDbirthday {
 		while(result.next()) {
 			temp = result.getString("birthday");
 			BirthdayMD = temp.split("-");
-			if(Month == Integer.valueOf(BirthdayMD[0]) && Day == Integer.valueOf(BirthdayMD[1]))
+			if(Month == Integer.valueOf(BirthdayMD[1]) && Day == Integer.valueOf(BirthdayMD[2]))
 				System.out.printf("%s %s\n" , result.getString("community"),result.getString("name"));
 		}
 
