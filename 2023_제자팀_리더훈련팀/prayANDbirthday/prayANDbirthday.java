@@ -27,7 +27,7 @@ public class prayANDbirthday {
 //		Date = LocalDate.of(2023,2,4);
 		int Day = Date.getDayOfMonth();
 		int Month = Date.getMonthValue();
-		int id;
+		int id = 0;
 		int[] DaysOfMonth = {31,28,31,30,31,30,31,31,30,31,30,31};
 		switch(Month) {
 		case 12: case 1: case 2:
@@ -61,7 +61,7 @@ public class prayANDbirthday {
 				System.out.printf("%s %s\n" , result.getString("community"),result.getString("name"));
 		}
 
-		System.out.println();
+		System.out.printf("\n-------------------------------\n\n");
 		
 		result = pray.getPray(stmt);
 		while(result.next()) {
@@ -73,6 +73,8 @@ public class prayANDbirthday {
 					result.getString("pray").replace('?', '-'));
 			}
 		}
+
+		System.out.printf("-------------------------------\n\n");
 
 		birthday.set_DiscipleBirthday(stmt);
 		result = birthday.get_DiscipleBirthday(stmt);
@@ -86,7 +88,7 @@ public class prayANDbirthday {
 				}
 			}
 
-		System.out.printf("\nProgram exit\n");
+		System.out.printf("\n총 %d명\nProgram exit\n",id+Day);
 		sql = input.nextLine();
 		input.close();
 		stmt.close();

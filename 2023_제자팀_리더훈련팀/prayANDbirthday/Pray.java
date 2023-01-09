@@ -32,9 +32,11 @@ public class Pray{
 		sql = "COPY one FROM 'C:/DataBaseCsvFile/"+quarter+".csv' DELIMITER ',' CSV HEADER;";
 		stmt.executeUpdate(sql);
 
-//		To order time correctly ,concat '9' to 1 month
-		sql = "update one set time = '9' || time where substring(time,1,2) = '1-';";
-		stmt.executeUpdate(sql);
+		if(quarter.equals("one")) {
+//			To order time correctly ,concat '9' to 1 month
+			sql = "update one set time = '9' || time where substring(time,1,2) = '1-';";
+			stmt.executeUpdate(sql);
+		}
 		return;
 	}
 
