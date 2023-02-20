@@ -17,25 +17,25 @@ public class Pray{
 		if(quarter.equals("one")) {//one
 			sql = "DROP TABLE IF EXISTS one CASCADE;"
 				+ "create table one (Time varchar , community varchar , name varchar ,\n"
-				+ "birthday varchar , pray varchar);";
+				+ "team varchar , birthday varchar , pray varchar);";
 			stmt.executeUpdate(sql);
 		}
 		else {//other
 			sql = "DROP TABLE IF EXISTS "+quarter+" CASCADE;" // reWrite
 				+ "create table "+quarter+" (Time varchar , community varchar , name varchar ,\n"
-				+ "pary varchar);";
+				+ "team varchar , pray varchar);";
 			stmt.executeUpdate(sql);
 		}
 	}
 
 	void setCSV(Statement stmt) throws SQLException {
-		sql = "COPY one FROM 'C:/DataBaseCsvFile/"+quarter+".csv' DELIMITER ',' CSV HEADER;";
+		sql = "COPY "+quarter+" FROM 'C:/DataBaseCsvFile/"+quarter+".csv' DELIMITER ',' CSV HEADER;";
 		stmt.executeUpdate(sql);
 		return;
 	}
 
 	ResultSet getPray(Statement stmt) throws SQLException { 
-		sql = "select * from one";
+		sql = "select * from "+quarter;
 		return stmt.executeQuery(sql);
 	}
 }
