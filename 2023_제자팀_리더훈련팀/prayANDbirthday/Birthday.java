@@ -1,4 +1,4 @@
-package Disciple;
+package PrayAndBirthday;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
